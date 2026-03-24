@@ -288,6 +288,72 @@
       cursor: pointer;
     }
 
+    .about-link {
+      position: fixed;
+      bottom: 16px;
+      right: 20px;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .about-link:hover {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .about-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      place-items: center;
+      z-index: 100;
+    }
+
+    .about-overlay.show {
+      display: grid;
+    }
+
+    .about-box {
+      background: #1a1a1a;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 500px;
+      margin: 24px;
+      text-align: center;
+    }
+
+    .about-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .about-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .about-close {
+      margin-top: 20px;
+      padding: 10px 28px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .about-close:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
     @media (max-width: 700px) {
       .card {
         min-height: auto;
@@ -363,6 +429,24 @@
     </div>
   </div>
 
+  <a class="about-link" id="aboutLink">About</a>
+
+  <div class="about-overlay" id="about">
+    <div class="about-box">
+      <div class="about-title">Security Awareness Workshop Demo</div>
+      <p class="about-text">
+        This project was created as part of an internal security awareness workshop.
+      </p>
+      <p class="about-text">
+        This demonstration shows how easy it is to be fooled by a fake website. It highlights the importance of always checking the domain address before submitting sensitive information.
+      </p>
+      <p class="about-text" style="font-weight: 500; margin-top: 16px;">
+        Always verify the URL in your browser's address bar before entering credentials or personal data.
+      </p>
+      <button class="about-close" id="closeAbout">Close</button>
+    </div>
+  </div>
+
   <div class="warning-overlay" id="warning">
     <div class="warning-box">
       <div class="warning-icon">⚠️</div>
@@ -397,6 +481,24 @@
     warning.addEventListener('click', (e) => {
       if (e.target === warning) {
         warning.classList.remove('show');
+      }
+    });
+
+    const about = document.getElementById('about');
+    const aboutLink = document.getElementById('aboutLink');
+    const closeAbout = document.getElementById('closeAbout');
+
+    aboutLink.addEventListener('click', () => {
+      about.classList.add('show');
+    });
+
+    closeAbout.addEventListener('click', () => {
+      about.classList.remove('show');
+    });
+
+    about.addEventListener('click', (e) => {
+      if (e.target === about) {
+        about.classList.remove('show');
       }
     });
   </script>
